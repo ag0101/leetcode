@@ -6,14 +6,11 @@ class Solution {
     }
 
     public void generateSubsets(int index, List<Integer> currentList, List<List<Integer>> allSubsets, int[] nums) {
-        if(index == nums.length) {
-            allSubsets.add(new ArrayList<>(currentList));
-            return;
+        allSubsets.add(new ArrayList<>(currentList));
+        for(int i = index; i < nums.length; i++) {
+            currentList.add(nums[i]);
+            generateSubsets(i + 1, currentList, allSubsets, nums);
+            currentList.remove(currentList.size() - 1);
         }
-        currentList.add(nums[index]);
-        generateSubsets(index + 1, currentList, allSubsets, nums);
-        currentList.remove(currentList.size() - 1);
-        generateSubsets(index + 1, currentList, allSubsets, nums);
-
     }
 }
